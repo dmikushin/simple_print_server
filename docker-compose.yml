@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  printing-kiosk:
+    image: printing-kiosk 
+    container_name: printing-kiosk
+    hostname: printing-kiosk
+    volumes:
+      - ${PWD}/printing-kiosk:/printing-kiosk/data
+    working_dir: /printing-kiosk
+    restart: always
+    cap_add:
+      - CAP_SYS_ADMIN
+    ports:
+      - "172.17.0.1:5000:5000"
+      - "172.17.0.1:1631:1631"
+    entrypoint: bash -c "/usr/sbin/cupsd && nginx && . ./venv/bin/activate && python ./run.py"
