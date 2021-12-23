@@ -40,9 +40,20 @@ disown -h %
 
 ## Deployment in Docker
 
+Build Docker image and deploy a container locally:
+
 ```
 docker build -t printing-kiosk:latest .
 docker-compose up -d
+```
+
+Or build Docker image for arm64 and publish it in the registry:
+
+```
+docker buildx build --platform linux/arm64 -t printing-kiosk:latest .
+docker tag printing-kiosk docker.local/printing-kiosk
+docker login docker.local
+docker push docker.local/printing-kiosk
 ```
 
 Use `http://127.0.0.1:1631` to configure your printer in CUPS.
