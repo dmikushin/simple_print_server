@@ -58,3 +58,15 @@ docker push docker.local/printing-kiosk
 
 Use `http://127.0.0.1:1631` to configure your printer in CUPS.
 
+## Troubleshooting
+
+Use `/usr/lib/cups/backend/usb` to ensure the printer is properly connected to CUPS:
+
+```
+/usr/lib/cups/backend/usb
+DEBUG: list_devices 
+DEBUG: libusb_get_device_list=13 
+DEBUG2: Printer found with device ID: MFG:Samsung;CMD:GDI;MDL:ML-2510 Series;CLS:PRINTER;STATUS:BUSY; Device URI: usb://Samsung/ML-2510%20Series?serial=3V61BKAQ411232V. 
+direct usb://Samsung/ML-2510%20Series?serial=3V61BKAQ411232V. "Samsung ML-2510 Series" "Samsung ML-2510 Series" "MFG:Samsung;CMD:GDI;MDL:ML-2510 Series;CLS:PRINTER;STATUS:BUSY;" "" 
+```
+
