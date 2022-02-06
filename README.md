@@ -21,9 +21,9 @@ At this time, this has only been tested with one printer and on Linux and OS X. 
  * Install requirements:
 
 ```
-cd simple_print_server/
 python3 -m venv ./venv/
 source ./venv/bin/activate
+pip install wheel
 pip install -r requirements.txt
 ```
 
@@ -31,14 +31,24 @@ pip install -r requirements.txt
 ## Manual deployment
 
 ```
-cd simple_print_server/
 source ./venv/bin/activate
+mkdir -p data
+python -c 'import secrets; print("SECRET_KEY = \"{}\"\n".format(secrets.token_hex(16)))' >> config.py
 python3 ./run.py &
 disown -h %
 ```
 
 
-## Deployment in Docker
+## Deployment as systemd service
+
+```
+sudo cp printing_kiosk.service /lib/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable printing_kiosk
+sudo systemctl start printing_kiosk
+```
+
+## Deployment as Docker container
 
 Build Docker image and deploy a container locally:
 

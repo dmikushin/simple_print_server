@@ -1,0 +1,13 @@
+[Unit]
+Description=Printing Kiosk Service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=printing_kiosk
+ExecStart=/home/printing_kiosk/printing_kiosk/venv/bin/python /home/printing_kiosk/printing_kiosk/run.py --serve-in-foreground
+WorkingDirectory=/home/printing_kiosk/printing_kiosk
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
